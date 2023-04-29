@@ -1,0 +1,61 @@
+body{
+    background-color:#94e4ff ;
+    /* background-image: url("../../public/peakpx.jpg"); */
+}
+
+#outer{
+    margin: 2%;
+    align-items: center;  
+    /* height: 100vh; */
+    /* background-color:#b3ecff ; */
+
+    border: 10px solid transparent;
+    /* border-image: url(border.png) 30 stretch; */
+}
+
+.everyblog{
+    border: 2px solid white;
+    margin: 5px;
+    /* width: 32%; */
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 5px;
+    position: relative;
+    color: aliceblue;
+    background: url("https://www.microsoft.com/en-us/research/uploads/prod/2020/07/newsletter-option-8-neural-network-3-1-640x360.png");
+    background-size: cover;
+    text-align: center;
+}
+
+#addbtn.everyblog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+    /* color: aliceblue; */
+    border: 2px solid rgb(248, 113, 30);
+}
+
+.everyblog:hover{
+    background-color: rgb(53, 51, 51);
+    /* font-size: x-large; */
+    width: 325px;
+    height: 225px;
+    border-radius: 20px;
+}
+
+#edit{
+    margin-right: 8px;
+}
+
+#edit:hover, #delete:hover{
+    font-size:x-large;
+}
+
+/* #createbtn{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+} */
