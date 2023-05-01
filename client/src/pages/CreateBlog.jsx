@@ -26,7 +26,7 @@ export default function CreateBlog() {
     },[dispatch])
 
     const handleSubmit = (data)=>{
-        axios.post("http://localhost:4000/posts/createpost",data)
+        axios.post("https://blogging-site-three.vercel.app/posts/createpost",data)
         .then((res)=>{navigate("/");console.log(res)})
         .catch((err)=>alert(err.response.data.message))
     }
