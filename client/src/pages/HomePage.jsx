@@ -27,7 +27,7 @@ export default function HomePage() {
             payload: localStorage.getItem("token")
         })
         setUserDtl(JSON.parse(localStorage.getItem("userinfo")))
-        axios.get("http://localhost:4000/posts/getallposts")
+        axios.get("https://blogging-site-three.vercel.app/posts/getallposts")
             .then((res) => { dispatch({ type: "ALLPOSTS", payload: res.data.data }) })
             .catch((err) => { alert(err.response.data) })
     }, [dispatch])
