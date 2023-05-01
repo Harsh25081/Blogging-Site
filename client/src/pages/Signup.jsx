@@ -28,7 +28,7 @@ function Signup() {
 
 
     const HandleSubmit = (data) => {
-        axios.post("http://localhost:4000/createuser", data)
+        axios.post("https://blogging-site-three.vercel.app/createuser", data)
             .then((res) => { console.log(res.data); navigate("/login") })
             .catch((err) => { alert(err.response.data.message) })
     }
