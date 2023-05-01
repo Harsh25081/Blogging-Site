@@ -23,7 +23,7 @@ export function EditBlog({ Show, setedt, data }){
 
   const handleEdit = (data) => {
     let {id,title,body}=data
-    axios.patch(`http://localhost:4000/posts/updatepost/${id}`,{title,body})
+    axios.patch(`https://blogging-site-three.vercel.app/posts/updatepost/${id}`,{title,body})
       .then((res) => {
         setShow(false);
         setedt(false);
