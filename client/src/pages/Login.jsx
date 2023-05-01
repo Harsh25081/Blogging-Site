@@ -25,7 +25,7 @@ function Login() {
   }
 
   const HandleSubmit = (data) => {
-    axios.post("http://localhost:4000/login", data)
+    axios.post("https://blogging-site-three.vercel.app/login", data)
       .then((res) => { localStorage.setItem("token", res.data.data); localStorage.setItem("userinfo", JSON.stringify(res.data.userData)); navigate("/") })
       .catch((err) => { alert(err.response.data.message) })
   }
