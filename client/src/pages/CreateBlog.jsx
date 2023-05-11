@@ -34,7 +34,7 @@ export default function CreateBlog() {
         formData.append('createdBy', createdBy)
         formData.append('category', category)
         formData.append('files', files)
-        axios.post("http://localhost:4000/blogs/createblog", formData)
+        axios.post("https://updated-blogging-site.vercel.app/blogs/createblog", formData)
             .then((res) => { navigate("/"); console.log(res.data.data) })
             .catch((err) => alert(err.response.data.message))
     }

@@ -33,7 +33,7 @@ export function EditBlog({ Show, setedt, data }){
     }
     console.log(passData)
 
-    axios.patch(`http://localhost:4000/blogs/updateblog/${id}`,passData)
+    axios.patch(`https://updated-blogging-site.vercel.app/blogs/updateblog/${id}`,passData)
       .then((res) => {
         setShow(false);
         setedt(false);

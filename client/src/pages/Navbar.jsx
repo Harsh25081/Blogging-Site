@@ -43,7 +43,7 @@ function NavScrollExample({ tok, userdt }) {
   }
 
   const filterBlogs = (filter) => {
-    axios.get(`http://localhost:4000/blogs/getblogbyfilter?category=${filter}`)
+    axios.get(`https://updated-blogging-site.vercel.app/blogs/getblogbyfilter?category=${filter}`)
       .then((res) => { dispatch({ type: "ALLPOSTS", payload: res.data.data });console.log(window.location.href) })
       .catch((err) => { alert(err.response.data.message) })
   }
