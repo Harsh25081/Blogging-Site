@@ -1,0 +1,28 @@
+.showBlogOuter {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 10%;
+    gap: 10px;
+}
+
+.showBlogOuter img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.showBlogDetails {
+    border: 2px solid black;
+    width: 50%;
+    border-radius: 10px;
+    padding: 10px;
+    color: black;
+}
+
+.showBlogDetails label {
+    font-weight: bold;
+}
+
+.showBlogDetails p {
+    margin: auto;
+}

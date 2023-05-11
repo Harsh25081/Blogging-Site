@@ -23,7 +23,7 @@ export function ConfirmDelete({ Show, setpop, id }) {
   }, [Show])
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/posts/deletepost/${id}`)
+    axios.delete(`http://localhost:4000/blogs/deleteblog/${id}`)
       .then((res) => {
         setShow(false);
         setpop(false);

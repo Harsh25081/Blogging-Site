@@ -1,61 +1,97 @@
-body{
+/* body {
     background-color:#94e4ff ;
-    /* background-image: url("../../public/peakpx.jpg"); */
-}
+    background-image: url("../../public/peakpx.jpg");
+} */
 
-#outer{
-    margin: 2%;
-    align-items: center;  
-    /* height: 100vh; */
-    /* background-color:#b3ecff ; */
-
+#outer {
+    margin: 1%;
+    margin-top: 0px;
+    align-items: center;
+    padding: 15px;
     border: 10px solid transparent;
-    /* border-image: url(border.png) 30 stretch; */
+    border-image: url('../../public/newborder.webp') 30 stretch;
+    background-color: #94e4ff;
 }
 
-.everyblog{
+.everyblog {
     border: 2px solid white;
     margin: 5px;
-    /* width: 32%; */
-    width: 300px;
-    height: 200px;
+    width: 32%;
     border-radius: 10px;
+}
+
+/* .everyblogrev{
+    border: 2px solid white;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+} */
+
+.everyblogtext {
     padding: 5px;
     position: relative;
     color: aliceblue;
-    background: url("https://www.microsoft.com/en-us/research/uploads/prod/2020/07/newsletter-option-8-neural-network-3-1-640x360.png");
     background-size: cover;
     text-align: center;
+    flex: 1;
+    background-color: #5cd3fb;
+    border-radius: 10px;
 }
 
-#addbtn.everyblog{
+.everyblogtext:hover {
+    cursor: pointer;
+}
+
+.everyblog img {
+    border-radius: 10px;
+    width: 100%;
+    height: 15rem;
+}
+
+/* .everyblogrev img{
+    border-radius: 10px;
+    width : 25rem;
+    height : 15rem ;
+} */
+
+#addbtn.everyblog {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 40px;
     cursor: pointer;
-    /* color: aliceblue; */
     border: 2px solid rgb(248, 113, 30);
+    width: 100%;
+    height: 50px;
 }
 
-.everyblog:hover{
-    background-color: rgb(53, 51, 51);
-    /* font-size: x-large; */
-    width: 325px;
-    height: 225px;
+.everyblog:hover {
+    background-color: rgba(182, 182, 182, 0.575);
+    border: 2px solid red;
+}
+
+/* .everyblogrev:hover{
+    background-color: rgba(182, 182, 182, 0.575);
     border-radius: 20px;
-}
-
-#edit{
-    margin-right: 8px;
-}
-
-#edit:hover, #delete:hover{
-    font-size:x-large;
-}
-
-/* #createbtn{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 5%;
 } */
+
+#edit {
+    margin-right: 8px;
+    color: black;
+}
+
+#delete {
+    color: black;
+}
+
+#edit:hover {
+    font-size: x-large;
+    color: yellow;
+}
+
+#delete:hover {
+    font-size: x-large;
+    color: red;
+}

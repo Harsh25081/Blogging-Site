@@ -13,9 +13,15 @@ app.use(cors({
     origin: '*'
 }));
 
-
 app.use(express.json())
 
+const multer = require("multer")
+app.use(multer().any())
+
 app.use("/",route)
+
+app.use((req, res) => {
+    res.status(404).send({ status: false, message: "Url not found" })
+})
 
 app.listen(process.env.PORT,()=>{console.log("Express App is running on PORT "+process.env.PORT)})

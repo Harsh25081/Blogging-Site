@@ -3,15 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export function EditBlog({ Show, setedt, data }){
   const [show, setShow] = useState(false);
   const [editblogdata,setEditblogdata] = useState({title:data.title,body:data.body,id:data._id})
+  let prevBlogData = editblogdata
 
   const state = useSelector((state)=>state)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleClose = () => {setShow(false);setedt(false)}
   const handleShow = () => setShow(true);
 
@@ -23,7 +25,15 @@ export function EditBlog({ Show, setedt, data }){
 
   const handleEdit = (data) => {
     let {id,title,body}=data
-    axios.patch(`http://localhost:4000/posts/updatepost/${id}`,{title,body})
+    let passData
+    if(prevBlogData.title===title){
+      passData = {body:body}
+    }else{
+      passData = {title:title,body:body}
+    }
+    console.log(passData)
+
+    axios.patch(`http://localhost:4000/blogs/updateblog/${id}`,passData)
       .then((res) => {
         setShow(false);
         setedt(false);
@@ -33,7 +43,6 @@ export function EditBlog({ Show, setedt, data }){
                 blog.body = body
             }
         })
-        console.log(state)
         navigate("/")
       })
       .catch((err) => console.log(err))
@@ -43,6 +52,14 @@ export function EditBlog({ Show, setedt, data }){
     let {name,value} = e.target
     setEditblogdata({...editblogdata,[name]:value})
   }
+
+  const handleCategoryChange = (e) => {
+    let { name, value } = e.target
+    dispatch({
+        type: name,
+        payload: value
+    })
+}
 
   return (
     <>
@@ -75,6 +92,27 @@ export function EditBlog({ Show, setedt, data }){
                 onChange={handleChange}
                 />
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Category</Form.Label>
+              <div id='radiogrp'>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Movies" checked={state.createblog.category === 'Movies'} onChange={handleCategoryChange} />Movies</label>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Food" checked={state.createblog.category === 'Food'} onChange={handleCategoryChange} />Food</label>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Lifestyle" checked={state.createblog.category === 'Lifestyle'} onChange={handleCategoryChange} />Lifestyle</label>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Travel" checked={state.createblog.category === 'Travel'} onChange={handleCategoryChange} />Travel</label>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Fashion" checked={state.createblog.category === 'Fashion'} onChange={handleCategoryChange} />Fashion</label>
+                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Others" checked={state.createblog.category === 'Others'} onChange={handleCategoryChange} />Others</label>
+                    </div>
+              {/* <Form.Control
+                name='category'
+                defaultValue={data.title}
+                onChange={handleChange}
+                autoFocus
+              /> */}
+            </Form.Group>
+
+
+
           </Form>
         </Modal.Body>
         <Modal.Footer>

@@ -1,26 +1,41 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from './pages/Signup';
 import Login from "./pages/Login";
 import CreateBlog from "./pages/CreateBlog";
 import HomePage from "./pages/HomePage";
 import ShowCompleteBlog from "./pages/ShowCompleteBlog";
+import NavScrollExample from "./pages/Navbar";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
+
+  let dispatch = useDispatch()
+
+  let [token, setToken] = useState(null)
+  let [userDtl, setUserDtl] = useState({})
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"))
+    dispatch({
+      type: "@LOGINTOKEN",
+      payload: localStorage.getItem("token")
+    })
+    setUserDtl(JSON.parse(localStorage.getItem("userinfo")))
+  }, [dispatch])
 
   return (
     <div >
       <BrowserRouter>
+        <NavScrollExample tok={setToken} userdt={setUserDtl} />
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<HomePage token={token} userDtl={userDtl} />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path="/createblog" element={<CreateBlog />}/>
-          <Route path="/showcompleteblog" element={<ShowCompleteBlog />}/>
+          <Route path="/createblog" element={<CreateBlog />} />
+          <Route path="/showcompleteblog" element={<ShowCompleteBlog />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <Signup /> */}
-      {/* <Login /> */}
     </div>
   );
 }
