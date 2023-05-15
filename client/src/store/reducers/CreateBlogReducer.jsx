@@ -14,6 +14,7 @@ export function CreateBlogReducer(createblog = initial, action) {
         case "@CREATEBLOGCREATEDBY": return { ...createblog, createdBy: payload }
         case "@CREATEBLOGCATEGORY": return { ...createblog, category: payload }
         case "@CREATEBLOGIMAGE": return { ...createblog, files: payload }
+        case "@UPDATEBLOGCATEGORY": return { ...createblog, category: payload }
         default: return createblog
     }
 }

@@ -36,6 +36,8 @@ export function ConfirmDelete({ Show, setpop, id }) {
       .catch((err) => console.log(err))
   }
 
+  console.log(id)
+
   return (
     <>
 

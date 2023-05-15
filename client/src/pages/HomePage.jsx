@@ -19,6 +19,7 @@ export default function HomePage() {
     const [popup, setPopup] = useState(false)
     const [edit, setEdit] = useState(false)
     const [blogDetail,setBlogDetail] = useState({})
+    const [id,setId] = useState("")
 
     useEffect(() => {
         setToken(localStorage.getItem("token"))
@@ -47,8 +48,9 @@ export default function HomePage() {
         setBlogDetail(blog)
     }
 
-    const DeleteBlog = () => {
+    const DeleteBlog = (id) => {
         setPopup(true)
+        setId(id);
     }
 
     return (
@@ -71,15 +73,15 @@ export default function HomePage() {
                                 <div className='everyblogtext' >
                                     <div onClick={() => { showCompleteBlog(blog) }} >
                                         <p style={{ fontWeight: "bold", fontSize: "25px" }}>{title}</p>
-                                        <p style={{ paddingLeft: "auto" }} >{body.length > 90 ? body.substring(0, 90) + '...' : body}</p>
+                                        <p style={{ paddingLeft: "auto" }} >{body?.length > 90 ? body?.substring(0, 90) + '...' : body}</p>
                                         <p style={{ color: "#ff0066" }}>Category - {category}</p>
-                                        <p style={{ color: "#c61aff" }}>By - {createdBy.name}</p>
+                                        <p style={{ color: "#c61aff" }}>By - {createdBy?.name}</p>
                                     </div>
                                     {createdBy.name === userDtl?.name ? blog.edit = true : blog.edit = false}
                                     {createdBy.name === userDtl?.name && <div style={{ left: "80%", position: "absolute", bottom: 0, margin: "1%" }}>
                                         <PencilSquare id='edit' onClick={()=>editblog(blog)} />
-                                        <TrashFill id='delete' onClick={DeleteBlog} />
-                                        {popup && <ConfirmDelete Show={true} setpop={setPopup} id={_id} />}
+                                        <TrashFill id='delete' onClick={()=>DeleteBlog(_id)} />
+                                        {popup && <ConfirmDelete Show={true} setpop={setPopup} id={id} />}
                                         {edit && <EditBlog Show={true} setedt={setEdit} data={blogDetail} />}
                                     </div>}
                                 </div>

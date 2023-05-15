@@ -6,15 +6,15 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export function EditBlog({ Show, setedt, data }){
+export function EditBlog({ Show, setedt, data }) {
   const [show, setShow] = useState(false);
-  const [editblogdata,setEditblogdata] = useState({title:data.title,body:data.body,id:data._id})
+  const [editblogdata, setEditblogdata] = useState({ title: data.title, body: data.body, id: data._id })
   let prevBlogData = editblogdata
 
-  const state = useSelector((state)=>state)
+  const state = useSelector((state) => state)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleClose = () => {setShow(false);setedt(false)}
+  const handleClose = () => { setShow(false); setedt(false) }
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -24,42 +24,42 @@ export function EditBlog({ Show, setedt, data }){
   }, [Show])
 
   const handleEdit = (data) => {
-    let {id,title,body}=data
+    let { id, title, body } = data
     let passData
-    if(prevBlogData.title===title){
-      passData = {body:body}
-    }else{
-      passData = {title:title,body:body}
+    if (prevBlogData.title === title) {
+      passData = { body: body }
+    } else {
+      passData = { title: title, body: body }
     }
     console.log(passData)
 
-    axios.patch(`https://updated-blogging-site.vercel.app/blogs/updateblog/${id}`,passData)
+    axios.patch(`https://updated-blogging-site.vercel.app/blogs/updateblog/${id}`, passData)
       .then((res) => {
         setShow(false);
         setedt(false);
-        state.allblogs.forEach((blog)=>{
-            if(blog._id === id){
-                blog.title =title
-                blog.body = body
-            }
+        state.allblogs.forEach((blog) => {
+          if (blog._id === id) {
+            blog.title = title
+            blog.body = body
+          }
         })
         navigate("/")
       })
       .catch((err) => console.log(err))
   }
 
-  const handleChange = (e)=>{
-    let {name,value} = e.target
-    setEditblogdata({...editblogdata,[name]:value})
+  const handleChange = (e) => {
+    let { name, value } = e.target
+    setEditblogdata({ ...editblogdata, [name]: value })
   }
 
   const handleCategoryChange = (e) => {
     let { name, value } = e.target
     dispatch({
-        type: name,
-        payload: value
+      type: name,
+      payload: value
     })
-}
+  }
 
   return (
     <>
@@ -86,29 +86,23 @@ export function EditBlog({ Show, setedt, data }){
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Body</Form.Label>
-              <Form.Control as="textarea"rows={3}
+              <Form.Control as="textarea" rows={3}
                 name='body'
                 defaultValue={data.body}
                 onChange={handleChange}
-                />
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Category</Form.Label>
               <div id='radiogrp'>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Movies" checked={state.createblog.category === 'Movies'} onChange={handleCategoryChange} />Movies</label>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Food" checked={state.createblog.category === 'Food'} onChange={handleCategoryChange} />Food</label>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Lifestyle" checked={state.createblog.category === 'Lifestyle'} onChange={handleCategoryChange} />Lifestyle</label>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Travel" checked={state.createblog.category === 'Travel'} onChange={handleCategoryChange} />Travel</label>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Fashion" checked={state.createblog.category === 'Fashion'} onChange={handleCategoryChange} />Fashion</label>
-                        <label><input type='radio' name="@CREATEBLOGCATEGORY" value="Others" checked={state.createblog.category === 'Others'} onChange={handleCategoryChange} />Others</label>
-                    </div>
-              {/* <Form.Control
-                name='category'
-                defaultValue={data.title}
-                onChange={handleChange}
-                autoFocus
-              /> */}
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Movies" checked={state.createblog.category === 'Movies'} onChange={handleCategoryChange} />Movies</label>
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Food" checked={state.createblog.category === 'Food'} onChange={handleCategoryChange} />Food</label>
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Lifestyle" checked={state.createblog.category === 'Lifestyle'} onChange={handleCategoryChange} />Lifestyle</label>
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Travel" checked={state.createblog.category === 'Travel'} onChange={handleCategoryChange} />Travel</label>
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Fashion" checked={state.createblog.category === 'Fashion'} onChange={handleCategoryChange} />Fashion</label>
+                <label><input type='radio' name="@UPDATEBLOGCATEGORY" value="Others" checked={state.createblog.category === 'Others'} onChange={handleCategoryChange} />Others</label>
+              </div>
             </Form.Group>
 
 
@@ -119,7 +113,7 @@ export function EditBlog({ Show, setedt, data }){
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={()=>handleEdit(editblogdata)}>
+          <Button variant="primary" onClick={() => handleEdit(editblogdata)}>
             Save Changes
           </Button>
         </Modal.Footer>

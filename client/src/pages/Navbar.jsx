@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
@@ -27,6 +27,8 @@ const Right = styled.div`
 
 function NavScrollExample({ tok, userdt }) {
 
+  let [search , SetSearch] = useState("")
+
   let state = useSelector((state) => state)
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -48,6 +50,18 @@ function NavScrollExample({ tok, userdt }) {
       .catch((err) => { alert(err.response.data.message) })
   }
 
+  const HandleSearch = (search) =>{
+      let filteredBlogs = state.allblogs.filter((blog)=>
+        blog.category.toLowerCase().includes(search.toLowerCase())       ||
+        blog.title.toLowerCase().includes(search.toLowerCase())          || 
+        blog.createdBy.name.toLowerCase().includes(search.toLowerCase())
+      )
+      dispatch({
+        type : "ALLPOSTS",
+        payload : filteredBlogs
+      })
+  }
+
   return (
     <Navbar bg="light" expand="lg"  >
       <Container fluid className='navContainer'>
@@ -63,8 +77,9 @@ function NavScrollExample({ tok, userdt }) {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={(e)=>SetSearch(e.target.value)}
               />
-              <Button style={{ fontSize: "1rem" }} variant="outline-secondary">Search</Button>
+              <Button style={{ fontSize: "1rem" }} onClick={()=>HandleSearch(search)} variant="outline-secondary">Search</Button>
             </Form>
           </Middle>
         </div>
